@@ -1,0 +1,11 @@
+<resources>
+
+    <color name="colorPrimary">#682493</color>
+    <color name="colorPrimaryDark">#602187</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="white">#fcfbfb</color>
+    <color name="links">#5266b4</color>
+    <color name="View_background">#8e619e</color>
+    <color name="faded_background">#8000</color>
+    <color name="border_colour">#3f51b5</color>
+</resources>

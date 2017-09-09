@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/main_display"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/sub_main_display"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        >
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_members"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                >
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        <RelativeLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2000"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/pbloading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pbloading"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="@string/loading_contents"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/noInternetConnection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#1000"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/Error_spacing"
+                android:drawableTop="@drawable/avata"
+                android:gravity="center_horizontal"
+                android:text="@string/oh_no"
+                android:textSize="30sp"
+                />
+
+            <TextView
+                android:id="@+id/try_again"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/error_message"
+                android:gravity="center_horizontal"
+                android:text="@string/an_error_occurred"
+                android:textSize="@dimen/no_internet_connection"
+
+                />
+            <Button
+                android:id="@+id/try_again_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/try_again"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/Error_spacing"
+                android:onClick="trigger"
+                android:text="@string/try_again"
+                android:textColor="@color/links"
+                android:textSize="@dimen/no_internet_connection"
+                />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#1000"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/error_message1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/Error_spacing"
+                android:drawableTop="@drawable/avata"
+                android:gravity="center_horizontal"
+                android:text="@string/empty_state"
+                android:textSize="30sp"
+                />
+
+            <TextView
+                android:id="@+id/try_again1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/error_message1"
+                android:gravity="center_horizontal"
+                android:text="@string/instrustions_empty_state"
+                android:textSize="@dimen/no_internet_connection"
+
+                />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/footerPB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        >
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

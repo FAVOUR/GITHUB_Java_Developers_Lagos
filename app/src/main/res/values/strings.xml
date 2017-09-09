@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Java_Developers</string>
+    <string name="Default">Not Stated</string>
+    <string name="developers_name"> Name</string>
+    <string name="gist">Gist</string>
+    <string name="bio">Bio</string>
+    <string name="repos">Repos</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="developers_location"> Location</string>
+    <string name="developers_email"> Email</string>
+    <string name="developers_blog">Blog</string>
+    <string name="share_message"> Check out this awesome developer</string>
+    <string name="browser_header">Complete action using</string>
+    <string name="share_header">Share via</string>
+    <string name="no_data_to_display">No data to display</string>
+    <string name="try_again">Try again</string>
+    <string name="an_error_occurred">No Internet found.Check your connection and Try again </string>
+    <string name="about">About</string>
+    <string name="website">Website</string>
+    <string name="please_wait">Please Wait....</string>
+    <string name="oh_no">Oh no!</string>
+    <string name="hireable">Hireable</string>
+    <string name="loading_contents">Loading Contents.....</string>
+    <string name="instrustions_empty_state">Check your internet connection and Try Again</string>
+    <string name="empty_state">No data to display</string>
+    <string name="load_more_popup">Check your connection then press Retry</string>
+
+</resources>
