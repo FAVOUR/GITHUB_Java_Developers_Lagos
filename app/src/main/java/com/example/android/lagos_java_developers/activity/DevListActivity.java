@@ -212,6 +212,7 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
                     noInternet.setVisibility(View.GONE);
                     devAdapter.addAll(developers);
                     isLoading = true;
+
                 }
 
             }
