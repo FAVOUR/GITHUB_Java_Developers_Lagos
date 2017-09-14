@@ -24,6 +24,6 @@
     <string name="loading_contents">Loading Contents.....</string>
     <string name="instrustions_empty_state">Check your internet connection and Try Again</string>
     <string name="empty_state">No data to display</string>
-    <string name="load_more_popup">Check your connection then press Retry</string>
+    <string name="load_more_popup">Check your connection then click Retry</string>
 
 </resources>

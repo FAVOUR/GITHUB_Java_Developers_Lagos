@@ -12,21 +12,19 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Return the information of a {@link DevProfileUtil} that has been built up from
- * parsing a JSON response.
- */
+ *  Return the information of a DevProfileUtil type that has been built up from parsing a JSON. */
+
 public final class DevProfileUtil {
 
-    /**
-     * Tag for the log messages
-     */
 
-    public static final String LOG_TAG = DevProfileUtil.class.getSimpleName();
+//     Tag for the log messages
 
 
-    /**
-     * Helper methods related to requesting and receiving a user data from GitHub.
-     */
+    private static final String LOG_TAG = DevProfileUtil.class.getSimpleName();
+
+
+//     Helper methods related to requesting and receiving a user data from GitHub.
+
 
     public static DeveloperProfile fetchProfilePageInfo(String requestUrl) {
         // Create URL object
@@ -40,11 +38,8 @@ public final class DevProfileUtil {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // Extract relevant fields from the JSON response and create an {@link Developers} object
-        DeveloperProfile developersInfo = extractDevelopersInfo(jsonResponse);
-
-        // Return the {@link  Developers}
-        return developersInfo;
+        // Extract and return relevant fields from the JSON response and create an {@link Developers} object
+        return extractDevelopersInfo(jsonResponse);
     }
 
 

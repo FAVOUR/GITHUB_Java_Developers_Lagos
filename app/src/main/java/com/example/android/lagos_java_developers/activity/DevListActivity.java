@@ -3,19 +3,25 @@ package com.example.android.lagos_java_developers.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.android.lagos_java_developers.R;
 import com.example.android.lagos_java_developers.adapter.Developers_Adapter;
 import com.example.android.lagos_java_developers.model.Developer;
 import com.example.android.lagos_java_developers.model.JSONResponse;
 import com.example.android.lagos_java_developers.rest.ApiClient;
-import com.example.android.lagos_java_developers.rest.GitHubClient;
+import com.example.android.lagos_java_developers.rest.GitHubService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +30,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DevListActivity extends AppCompatActivity implements Developers_Adapter.ListItemClickListiner  {
+public class DevListActivity extends AppCompatActivity implements Developers_Adapter.ListItemClickListiner, SwipeRefreshLayout.OnRefreshListener {
+
 
     List<Developer> developers;
-    GitHubClient gitHubClient;
+    GitHubService gitHubClient;
     RecyclerView developerRv;
     Developers_Adapter devAdapter;
     LinearLayoutManager  layoutManager;
     int visibleItemCount;
     int totalItemCount;
     int firstVisibleItemPosition;
-    int previousTotal = 0;
     int pageIndex =1;
     boolean isLoading;
+    SwipeRefreshLayout swipeContainer;
     List<Developer> lagosJavaDev;
     LinearLayout loadMore;
     RelativeLayout noInternet;
@@ -50,7 +57,8 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dev_list_dev);
 
-        gitHubClient = ApiClient.getClient().create(GitHubClient.class);
+
+        gitHubClient = ApiClient.getClient().create(GitHubService.class);
 
         // Creates an object of the recyclerView in the activity_developers_list.xml file
         developerRv = (RecyclerView) findViewById(R.id.rv_members);
@@ -75,6 +83,17 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
         //spins to show that it is loading
         loadMore = (LinearLayout) findViewById(R.id.footerPB);
 
+        //refreshes when pulled down
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+
+
+        swipeContainer.setOnRefreshListener(this);
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
 
             getDevelopersList();
@@ -92,8 +111,6 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
 
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                    super.onScrolled(recyclerView, dx, dy);
-
 
                         if (dy > 0){
                             //Total number of items on the screen
@@ -105,22 +122,16 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
                             //Total number of items you have already seen
                             firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
-                            if (isLoading){
-                                if (totalItemCount >  previousTotal){
-                                    isLoading = false ;
-                                    previousTotal = totalItemCount;
-                                }
 
-                            }
-                            if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                            if (isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
 
                                 if  (pageIndex < 8){
 
-                                    pageIndex += 1;
-                                    loadMore.setVisibility(View.VISIBLE);
-                                    getDevelopersList();
 
-                                    isLoading =true;
+                                    loadMore.setVisibility(View.VISIBLE);
+                                    pageIndex += 1;
+                                    getDevelopersList();
+                                    isLoading = false;
                                 }
 
                                 else{
@@ -146,17 +157,61 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
 
             }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_dev_list, menu);
+
+        MenuItem search = menu.findItem(R.id.app_bar_search);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+
+        search(searchView);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                devAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+    }
+
+
+
+
+
+
+
+
     private void getDevelopersList(){
         developersList().enqueue(new Callback<JSONResponse>() {
             @Override
             public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
                 developers = response.body().getItem();
                 if( developers !=null && ! developers.isEmpty()) {
-
+                    swipeContainer.setVisibility(View.VISIBLE);
                     loadMore.setVisibility(View.GONE);
                     loading.setVisibility(View.GONE);
                     noInternet.setVisibility(View.GONE);
                     devAdapter.addAll(developers);
+                    isLoading = true;
                 }
 
             }
@@ -176,8 +231,10 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
                             }).show();
                 }
                 else {
+
                     loadMore.setVisibility(View.GONE);
                     loading.setVisibility(View.GONE);
+                    swipeContainer.setVisibility(View.GONE);
                     noInternet.setVisibility(View.VISIBLE);
                 }
 
@@ -186,10 +243,11 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
 
         }
 
-            private  Call<JSONResponse> developersList(){
 
-               return gitHubClient.getJsonResponse(pageIndex);
-           }
+    private Call<JSONResponse> developersList() {
+
+        return gitHubClient.getJsonResponse(pageIndex);
+    }
 
 
     public void trigger(View view) {
@@ -198,6 +256,32 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
         getDevelopersList();
 
     }
+
+
+    @Override
+    public void onRefresh() {
+
+
+        if (!loadMore.isShown()) {
+
+            noInternet.setVisibility(View.GONE);
+            swipeContainer.setRefreshing(true);
+
+            pageIndex = 1;
+
+            devAdapter.clear();
+            getDevelopersList();
+
+            //Disable the refreshing animation
+            swipeContainer.setRefreshing(false);
+
+        } else {
+            Toast.makeText(DevListActivity.this, "Allow list to load!", Toast.LENGTH_LONG).show();
+            swipeContainer.setRefreshing(false);
+        }
+
+    }
+
 
 
     @Override

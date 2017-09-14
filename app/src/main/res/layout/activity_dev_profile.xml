@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|center_vertical"
         android:background="@color/faded_background"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
 
@@ -54,7 +54,6 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:background="#1000"
         android:visibility="gone"
-
         >
 
         <TextView
@@ -63,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/Error_spacing"
+            android:drawableTop="@drawable/avata"
             android:gravity="center_horizontal"
             android:text="@string/oh_no"
             android:textSize="30sp"
@@ -271,18 +271,18 @@
 
                             <TextView
                                 android:id="@+id/adev_followers"
+                                style="@style/Digit_display"
                                 android:layout_width="wrap_content"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"
-                                style="@style/Digit_display"/>
+                                android:layout_weight="1"/>
 
 
                             <TextView
                                 android:id="@+id/followerstxt"
+                                style="@style/Digit_Subtext"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/followers"
-                                style="@style/Digit_Subtext"/>
+                                android:text="@string/followers"/>
                         </LinearLayout>
 
                         <View
@@ -303,18 +303,18 @@
                             >
                             <TextView
                                 android:id="@+id/adev_following"
+                                style="@style/Digit_display"
                                 android:layout_width="wrap_content"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
-                                style="@style/Digit_display"
                                />
 
                             <TextView
                                 android:id="@+id/followingtxt"
+                                style="@style/Digit_Subtext"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/following"
-                              style="@style/Digit_Subtext"/>
+                                android:text="@string/following"/>
 
                         </LinearLayout>
                         <View
@@ -337,17 +337,17 @@
 
                             <TextView
                                 android:id="@+id/adev_repos"
+                                style="@style/Digit_display"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                style="@style/Digit_display"/>
+                                android:layout_weight="1"/>
 
                             <TextView
                                 android:id="@+id/repostxt"
+                                style="@style/Digit_Subtext"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/repos"
-                                style="@style/Digit_Subtext"/>
+                                android:text="@string/repos"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -382,15 +382,15 @@
 
                             <TextView
                                 android:id="@+id/hdev_location"
-                                android:layout_weight="1"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1"
                                 android:text="@string/developers_location"
                                 />
 
                             <TextView
                                 android:id="@+id/adev_location"
-                                android:layout_weight="1.4"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1.4"
                                 android:text="@string/Default"
 
                                 />
@@ -404,15 +404,15 @@
 
                             <TextView
                                 android:id="@+id/hdev_email"
-                                android:layout_weight="1"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1"
                                 android:text="@string/developers_email"
                                 />
 
                             <TextView
                                 android:id="@+id/adev_email"
-                                android:layout_weight="1.4"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1.4"
                                 android:text="@string/Default"
                                 />
                         </LinearLayout>
@@ -425,15 +425,15 @@
 
                             <TextView
                                 android:id="@+id/hdev_hirable"
-                                android:layout_weight="1"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1"
                                 android:text="@string/hireable"
                                 />
 
                             <TextView
                                 android:id="@+id/adev_hirable"
-                                android:layout_weight="1.4"
                                 style="@style/last_cardview_title"
+                                android:layout_weight="1.4"
                                 android:text="@string/Default"
                                 />
                         </LinearLayout>

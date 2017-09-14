@@ -20,8 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.DevProfileActivity"
+                  android:parentActivityName=".activity.DevListActivity"
                   android:theme="@style/ProfileAppTheme"
             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.DevListActivity"/>
         </activity>
     </application>
 

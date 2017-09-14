@@ -5,9 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-
-
     >
+
+
 
     <RelativeLayout
         android:id="@+id/sub_main_display"
@@ -16,7 +16,13 @@
         android:layout_weight="0.1"
         >
 
+        <android.support.v4.widget.SwipeRefreshLayout
 
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_members"
@@ -27,7 +33,7 @@
 
 
             </android.support.v7.widget.RecyclerView>
-
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <RelativeLayout
             android:id="@+id/loading"
