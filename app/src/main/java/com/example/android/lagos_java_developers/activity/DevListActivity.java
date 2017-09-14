@@ -3,14 +3,10 @@ package com.example.android.lagos_java_developers.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -157,41 +153,7 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
 
             }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_dev_list, menu);
 
-        MenuItem search = menu.findItem(R.id.app_bar_search);
-
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
-
-        search(searchView);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void search(SearchView searchView) {
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                devAdapter.getFilter().filter(newText);
-                return true;
-            }
-        });
-
-    }
 
 
 
@@ -212,7 +174,6 @@ public class DevListActivity extends AppCompatActivity implements Developers_Ada
                     noInternet.setVisibility(View.GONE);
                     devAdapter.addAll(developers);
                     isLoading = true;
-
                 }
 
             }

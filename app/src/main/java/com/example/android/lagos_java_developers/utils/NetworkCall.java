@@ -12,9 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-/**
- * Created by OZMA NIG COM LTD on 28-Aug-17.
- */
 
 public class NetworkCall {
 

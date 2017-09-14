@@ -3,9 +3,6 @@ package com.example.android.lagos_java_developers.rest;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by OZMA NIG COM LTD on 26-Aug-17.
- */
 
 public class ApiClient {
 
