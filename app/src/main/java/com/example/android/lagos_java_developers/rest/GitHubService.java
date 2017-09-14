@@ -7,9 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 // Request method and URL specified in the annotation
-// Callback for the parsed response is the last parameter
-
-//&page=/
 
 public interface GitHubService {
 
